@@ -1,27 +1,21 @@
-function isOpenP(map: Map<string,string>, key: string){
-    const itr = map.keys()
-    while(itr){
-        console.log(itr)
-        if (itr.next().value === key) return true
-    }
-    return false
-}
-function isValid(s: string): boolean {
-    let p_map = new Map<string, string>([['(',')'], ['[',']'], ['{','}']]);
-    let p_stack: string[] = []
-    for(let i=0; i< s.length; i++){
-        if(p_map.has(s[i])){
-            p_stack.push(s[i])
-            continue;
-        }
-    
-        if(s[i] === p_map.get(p_stack[p_stack.length-1])){
-            p_stack.pop();
-            continue;
-        }
-        return false
-    }   
-    return true
-};
+function bs_list(haystack: number[], needle: number): boolean {
+    let start = 0
+    let end = haystack.length
+    let mid
+    while(start<end){
+        mid = Math.floor((start+end)/2)
 
-console.log(isValid("()[]{}"))
+        if (needle === haystack[mid]) return true
+        if (needle < haystack[mid]){
+            end = mid;
+        }
+        else if (needle > haystack[mid]){
+            start = mid + 1;
+        }
+
+    }
+    return false;
+}
+
+console.log("Item found", bs_list([1, 3, 4, 69, 71, 81, 90, 99, 420, 1337, 69420],69))
+
