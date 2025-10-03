@@ -1,17 +1,7 @@
-export default function dfs(head: BinaryNode<number> | null, needle: number): boolean {
-    if(head === null){
+export default function dfs(head: BinaryNode<number> | null | undefined, needle: number): boolean {
+    if(head?.value === null || head?.value === undefined ){
         return false
     }
-
-    if(head.value === needle){
-        return true
-    }
-
-    if(head.value < needle){
-        return dfs(head.right, needle)
-    }else{
-        return dfs(head.left, needle)
-    }
-
-
+    if(head.value == needle) return true 
+    return dfs(head?.left, needle) || dfs(head?.right,needle)
 }   

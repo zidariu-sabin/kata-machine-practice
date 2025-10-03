@@ -1,23 +1,22 @@
 import Queue from "./Queue";
 
 export default function bfs(head: BinaryNode<number>, needle: number): boolean {
-    let queue  = new Queue<BinaryNode<number>| null| undefined>();
-    queue.enqueue(head);
+    
+    let queue : Queue<BinaryNode<number>> = new Queue()
+
+    queue.enqueue(head)
 
     while(queue.length){
-        
-        const curr = queue.deque();
-
-        if(!curr){
-            continue;
+        let curr = queue.deque()
+        if(curr?.value === needle){
+            return true
         }
-
-        if(curr.value === needle) return true
-
-        queue.enqueue(curr.left)
-        queue.enqueue(curr.right)
-
+        if(curr?.left){
+            queue.enqueue(curr?.left)
+        }
+         if(curr?.right){
+             queue.enqueue(curr?.right)
+        }
     }
     return false
-
 }

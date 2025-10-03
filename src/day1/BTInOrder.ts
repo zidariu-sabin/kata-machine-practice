@@ -1,5 +1,5 @@
 function walk(curr: BinaryNode<number> | null, path: number[]): number[] {
-    if (!curr) return []
+    if (curr === null) return path
 
     walk(curr.left,path)
     path.push(curr.value)

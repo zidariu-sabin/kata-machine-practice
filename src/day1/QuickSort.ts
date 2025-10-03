@@ -1,28 +1,30 @@
 function qs(arr: number[], low: number, high: number){
-    if(low > high) return
-    
-    let pivot_index = partition(arr, low ,high);
-     qs(arr,pivot_index+1,high);
-    qs(arr,low, pivot_index-1);
+ //stop condition
+ if(low >= high) return;
+ let piv_idx = partition(arr,low,high);
+
+ qs(arr, piv_idx + 1, high);
+ qs(arr, low, piv_idx-1);
+ //recurse
 }
 function partition(arr: number[], low: number, high: number): number{
-    let pivot= arr[high]
-    let index = low-1
+    let idx = low - 1;
+    let piv = arr[high];
 
-    for(let i= low; i<high; i++){
-        if(arr[i]<pivot){
-            index++
-            let temp = arr[i]
-            arr[i] = arr[index]
-            arr[index] = temp
+    for(let i = low; i<high; i++){
+        //take piv as the last element and weak order items
+        if(piv>arr[i]){
+            idx++;
+            let temp = arr[idx];
+            arr[idx] = arr[i];
+            arr[i] = temp;
         }
     }
-
-    index++
-    arr[high] = arr[index]
-    arr[index] = pivot
-    
-    return index
+    //change piv to the last item in the weak order
+    idx++;
+    arr[high] = arr[idx]
+    arr[idx] = piv;
+    return idx
 }
 export default function quick_sort(arr: number[]): void {
     qs(arr,0,arr.length-1)
